@@ -502,8 +502,6 @@ int main()
 	}
 	fclose(textFile);
 	Draw(fileRecords, 4);
-	Draw(fileRecords, 4);
-	Draw(fileRecords, 4);
-	Draw(fileRecords, 4);
+
 
 }
