@@ -186,5 +186,6 @@ int main()
 	cout << "Вывод таблицы с измененными: \n";
 	cout << "\n";
 
+
 	PrintTable(records);
 }
