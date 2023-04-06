@@ -48,6 +48,7 @@ int main()
 
 	cout.fill(' ');
 
+
 	cout.width(16); cout << "|StarOffice";
 	cout.width(16); cout << "|Sun";
 	cout.width(16); cout << "|4";
