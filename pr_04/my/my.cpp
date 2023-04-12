@@ -83,9 +83,9 @@ int main()
 	SetConsoleOutputCP(1251);
 
 	struct Record records[3] = {
-	{ "Office", "Microsoft", 4, 870.99, {11,01,2011} },
-	{ "SmartSute", "Lotus", 5, 1020.99, {21,12,2012} },
-	{ "StarOffice", "Sun", 4, 9.99, {21,10,2020} },
+	{ "Office", "Microsoft", "4", "870.99", {11,01,2011} },
+	{ "SmartSute", "Lotus", "5", "1020.99", {21,12,2012} },
+	{ "StarOffice", "Sun", "4", "9.99", {21,10,2020} },
 	};
 
 	cout << "Вывод таблицы из нулевой практики: \n";
@@ -174,8 +174,13 @@ int main()
 
 	// 3 вариант. Заменить на удвоенное значение все четные целочисленные значения в файле.
 	fopen_s(&Fisunovabin, "Fisunovabin.bin", "rb");
-	//swap(stoi(t1Record[0].number), ((stoi(t1Record[0].number))*2)); ДОДЕЛАТЬ!!!!
-	//swap(t1Record[1].date.month, t1Record[3].date.month);
+
+	for (int i = 0; i < 4; i++) {
+		if ((int)rdRecords[i].number % 2 == 0) {
+			strcpy(rdRecords[i].number, ("%s", (int)rdRecords[i].number * 2));
+		}
+	}
+
 	fclose(Fisunovabin);
 
 	fopen_s(&Fisunovabin, "Fisunovabin.bin", "wb+");
