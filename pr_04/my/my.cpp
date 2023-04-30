@@ -17,7 +17,7 @@ struct Record
 {
 	char name[20];
 	char manufacturer[20];
-	char number[5];
+	unsigned short number;
 	char price[10];
 	struct Date date;
 
@@ -83,9 +83,9 @@ int main()
 	SetConsoleOutputCP(1251);
 
 	struct Record records[3] = {
-	{ "Office", "Microsoft", "4", "870.99", {11,01,2011} },
-	{ "SmartSute", "Lotus", "5", "1020.99", {21,12,2012} },
-	{ "StarOffice", "Sun", "4", "9.99", {21,10,2020} },
+	{ "Office", "Microsoft", 4, "870.99", {11,01,2011} },
+	{ "SmartSute", "Lotus", 5, "1020.99", {21,12,2012} },
+	{ "StarOffice", "Sun", 4, "9.99", {21,10,2020} },
 	};
 
 	cout << "Вывод таблицы из нулевой практики: \n";
@@ -96,7 +96,7 @@ int main()
 	FILE* Fisunova;
 	fopen_s(&Fisunova, "Fisunova.txt", "w+");
 	for (int i = 0; i < 3; i++) {
-		fprintf(Fisunova, "%s %s %s %s %d %d %d \n", \
+		fprintf(Fisunova, "%s %s %d %s %d %d %d \n", \
 			records[i].name, records[i].manufacturer, \
 			records[i].number, records[i].price, \
 			records[i].date.day, records[i].date.month, records[i].date.year);
@@ -111,7 +111,7 @@ int main()
 	for (int i = 0; i < 3; i++) {
 		fscanf_s(Fisunova, "%s", &rdRecords[i].name, _countof(rdRecords[i].name));
 		fscanf_s(Fisunova, "%s", &rdRecords[i].manufacturer, _countof(rdRecords[i].manufacturer));
-		fscanf_s(Fisunova, "%s", &rdRecords[i].number, _countof(rdRecords[i].number));
+		fscanf_s(Fisunova, "%d", &rdRecords[i].number);
 		fscanf_s(Fisunova, "%s", &rdRecords[i].price, _countof(rdRecords[i].price));
 		fscanf_s(Fisunova, "%d", &rdRecords[i].date.day);
 		fscanf_s(Fisunova, "%d", &rdRecords[i].date.month);
@@ -172,14 +172,12 @@ int main()
 
 	PrintTable(records);
 
-	// 3 вариант. Заменить на удвоенное значение все четные целочисленные значения в файле.
-	fopen_s(&Fisunovabin, "Fisunovabin.bin", "rb");
+	//9 вариант. Поменять значения даты в полях 2 и 4.
 
-	for (int i = 0; i < 4; i++) {
-		if ((int)rdRecords[i].number % 2 == 0) {
-			strcpy(rdRecords[i].number, ("%s", (int)rdRecords[i].number * 2));
-		}
-	}
+	fopen_s(&Fisunovabin, "Fisunovabin.bin", "rb");
+	swap(t1Record[1].date.day, t1Record[3].date.day);
+	swap(t1Record[1].date.month, t1Record[3].date.month);
+	swap(t1Record[1].date.year, t1Record[3].date.year);
 
 	fclose(Fisunovabin);
 
